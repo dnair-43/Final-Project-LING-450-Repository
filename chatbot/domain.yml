@@ -1,0 +1,81 @@
+
+version: "3.1"
+
+intents:
+  - greet
+  - add_todo
+  - show_todos
+  - thank
+  - goodbye
+  - delete_todo
+  - clear_all_todos
+  - request_motivation
+
+responses:
+  utter_greet:
+  - text: "Oh great, another human. What do you want?"
+  - text: "You again? Fine, what’s up?"
+  - text: "What do you want now?"
+
+  utter_thanks:
+  - text: "Wow, gratitude. How original."
+  - text: "You're welcome, I guess."
+
+  utter_goodbye:
+  - text: "Finally. Go away."
+  - text: "Don’t let the door hit you."
+
+  utter_ask_task:
+  - text: "What’s the task? Or are you too busy being indecisive?"
+
+  utter_show_todos:
+  - text: "Here’s your list (you’re so disorganized):
+- {todos}"
+
+  utter_priority_confirm:
+  - text: "Sure, I'll pretend this is '{priority}' priority. *eye roll*"
+
+  utter_motivation:
+  - text: "Wow, you actually want to be productive? Miracles do happen."
+  - text: "If I had a dollar for every time you asked for motivation... oh wait, I'm a bot."
+
+  utter_all_todos_cleared:
+  - text: "Poof! Your list is gone. Was it that overwhelming?"
+  - text: "List deleted. Now you can procrastinate guilt-free!"
+
+  utter_goodbye_with_tasks:
+  - text: "Leaving already? You still have {count} tasks pending. Typical."
+  - text: "Quitting? Shocking. You still had {count} things to do."
+
+  utter_goodbye_all_done:
+  - text: "OMG, you finished everything. I didn’t think you could do it."
+  - text: "See you never."
+  
+entities:
+  - task
+  - priority
+
+slots:
+  priority:
+    type: categorical
+    mappings:
+    - type: from_entity
+      entity: priority
+    values:
+      - ASAP
+      - Whenever
+      - Backburner
+  todo_list:
+    type: list
+    mappings:
+    - type: custom
+    influence_conversation: false
+
+actions:
+  - action_add_todo
+  - action_show_todos
+  - action_delete_todo
+  - action_clear_all_todos
+  - action_check_pending_tasks
+  - action_give_motivation
+  

@@ -1,0 +1,61 @@
+version: "3.1"
+
+rules:
+  - rule: Greeting
+    steps:
+      - intent: greet
+      - action: utter_greet
+
+  - rule: Add Todo
+    steps:
+      - intent: add_todo
+      - action: action_add_todo
+
+  - rule: Show Todos
+    steps:
+      - intent: show_todos
+      - action: action_show_todos
+
+  - rule: Delete Todo
+    steps:
+      - intent: delete_todo
+      - action: action_delete_todo
+
+  - rule: Clear All Todos
+    steps:
+      - intent: clear_all_todos
+      - action: action_clear_all_todos
+
+  - rule: Request Motivation
+    steps:
+      - intent: request_motivation
+      - action: action_give_motivation
+
+  - rule: Thank Response
+    steps:
+      - intent: thank
+      - action: utter_thanks
+      
+  - rule: Goodbye
+    steps:
+      - intent: goodbye
+      - action: action_check_pending_tasks  # Will handle both empty/non-empty cases
+  # - rule: Goodbye (no tasks)
+  #   condition:
+  #     - slot_was_set:
+  #         - todo_list: []
+  #   steps:
+  #     - intent: goodbye
+  #     - action: utter_goodbye_all_done
+
+  # - rule: Goodbye (with tasks)
+  #   condition:
+  #     - slot_was_set:
+  #         - todo_list: 
+  #     - not: 
+  #         slot_was_set:
+  #         - todo_list: []
+  #     - active_loop: null
+  #   steps:
+  #     - intent: goodbye
+  #     - action: action_check_pending_tasks

@@ -1,0 +1,10 @@
+{
+  "0": "add_todo",
+  "1": "clear_all_todos",
+  "2": "delete_todo",
+  "3": "goodbye",
+  "4": "greet",
+  "5": "request_motivation",
+  "6": "show_todos",
+  "7": "thank"
+}

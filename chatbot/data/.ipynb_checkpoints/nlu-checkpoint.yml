@@ -1,0 +1,72 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - Hi
+    - Hello
+    - Hey bot
+    - What's up?
+    - Sup
+    - Yo
+
+- intent: show_todos
+  examples: |
+    - Show my tasks
+    - What's on my list?
+    - What do I need to do?
+    - List my todos
+
+- intent: thank
+  examples: |
+    - Thanks
+    - Thank you
+    - Appreciate it
+    - You're the best
+
+- intent: goodbye
+  examples: |
+    - Bye
+    - Goodbye
+    - See you later
+    - Later
+
+- intent: add_todo
+  examples: |
+    - Add reminder to [call mom]
+    - Add task [buy groceries]
+    - Remind me to [water plants]
+    - I need to [finish report]
+    - Create new reminder to [schedule meeting]
+    - Create reminder [pay rent]
+    - Make a task to [book flight]
+    - Add [buy milk] to my list
+    - Remind me to [call mom]
+    - I need to [finish homework]
+    - Can you add [schedule meeting]?
+
+- intent: delete_todo
+  examples: |
+    - Delete task [buy milk]
+    - Remove reminder [call boss]
+    - Cancel [write essay]
+    - Void [clean room]
+
+- intent: clear_all_todos
+  examples: |
+    - Erase my entire to do list
+    - Void my entire to do list
+    - Self-destruct my entire to do list
+    - Cancel my entire to do list
+    - Delete list
+    - Delete to-do list
+    - Erase list
+
+- intent: request_motivation
+  examples: |
+    - Give motivation
+    - Motivate me
+    - I need encouragement
+    - Say something inspiring
+    - Pep talk please
+    - I don't want to [clean my room]
