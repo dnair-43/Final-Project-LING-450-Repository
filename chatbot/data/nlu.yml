@@ -16,6 +16,14 @@ nlu:
     - What's on my list?
     - What do I need to do?
     - List my todos
+    - show me the list
+    - list
+    - the list
+    - list my tasks
+    - what are my tasks
+    - show list
+    - show tasks
+    - show
 
 - intent: thank
   examples: |
@@ -33,40 +41,72 @@ nlu:
 
 - intent: add_todo
   examples: |
-    - Add reminder to [call mom]
-    - Add task [buy groceries]
-    - Remind me to [water plants]
-    - I need to [finish report]
-    - Create new reminder to [schedule meeting]
-    - Create reminder [pay rent]
-    - Make a task to [book flight]
-    - Add [buy milk] to my list
-    - Remind me to [call mom]
-    - I need to [finish homework]
-    - Can you add [schedule meeting]?
-
+    - Add reminder to [call mom]{"entity": "task"}
+    - add task [buy groceries]{"entity": "task"}
+    - Remind me to [water plants]{"entity": "task"}
+    - I need to [finish my report]{"entity": "task"}
+    - create new reminder to [schedule a meeting]{"entity": "task"}
+    - Create reminder [pay rent]{"entity": "task"}
+    - Make a task to [book my flight]{"entity": "task"}
+    - add [buy milk]{"entity": "task"} to my list
+    - remind me to [call mom]{"entity": "task"}
+    - I need to [finish homework]{"entity": "task"}
+    - can you add [schedule meeting]{"entity": "task"}?
+    - set a reminder to [eat pizza]{"entity": "task"}
+    - remind me to [study for the exam]{"entity": "task"}
+    - I should really [clean my room]{"entity": "task"}
+    - add [workout]{"entity": "task"} to my tasks
+    - please remind me to [call the doctor]{"entity": "task"}
+    - Remind me to [buy some milk](task) [ASAP](priority)
+    - [Finish my essay](task) is [high](priority) priority
+    - I need to [call the doctor](task), it's [urgent](priority)
+    - add [watch that movie](task) to my list. It's [low](priority)
+    - [submit the report](task) by tomorrow! It's [ASAP](priority)
+    - [Pick up the package](task), but it's not urgent, just [low](priority)
+    - can you add [go to the gym](task) to my list? [Medium](priority) priority
+    - [Water the plants](task) should be [high](priority)
+    - make sure to [text Alice](task), it's [medium](priority) urgency
+    - [Check emails](task) later. It's only [low](priority)
+    - I absolutely need to [fix my resume](task) [ASAP](priority)!
+    - Remind me to [go to the store](task) [soon](priority)
+    
 - intent: delete_todo
   examples: |
-    - Delete task [buy milk]
-    - Remove reminder [call boss]
-    - Cancel [write essay]
-    - Void [clean room]
+    - Delete task [buy milk]{"entity": "task"}
+    - Remove reminder [call boss]{"entity": "task"}
+    - Cancel [write essay]{"entity": "task"}
+    - Void [clean room]{"entity": "task"}
+    - delete [eat food]{"entity": "task"}
+    - remove [dancing]{"entity": "task"} from my list
 
 - intent: clear_all_todos
   examples: |
     - Erase my entire to do list
     - Void my entire to do list
-    - Self-destruct my entire to do list
+    - self-destruct my entire to do list
     - Cancel my entire to do list
     - Delete list
-    - Delete to-do list
-    - Erase list
+    - delete to-do list
+    - erase list
 
 - intent: request_motivation
   examples: |
     - Give motivation
     - Motivate me
     - I need encouragement
-    - Say something inspiring
-    - Pep talk please
-    - I don't want to [clean my room]
+    - say something inspiring
+    - pep talk please
+    - I don't want to [clean my room]{"entity": "task"}
+
+- intent: inform_priority
+  examples: |
+    - it's high priority
+    - ASAP
+    - Low
+    - it's not important
+    - Urgent
+    - medium
+    - normal
+    - just normal
+    - high
+

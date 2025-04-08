@@ -39,23 +39,4 @@ rules:
   - rule: Goodbye
     steps:
       - intent: goodbye
-      - action: action_check_pending_tasks  # Will handle both empty/non-empty cases
-  # - rule: Goodbye (no tasks)
-  #   condition:
-  #     - slot_was_set:
-  #         - todo_list: []
-  #   steps:
-  #     - intent: goodbye
-  #     - action: utter_goodbye_all_done
-
-  # - rule: Goodbye (with tasks)
-  #   condition:
-  #     - slot_was_set:
-  #         - todo_list: 
-  #     - not: 
-  #         slot_was_set:
-  #         - todo_list: []
-  #     - active_loop: null
-  #   steps:
-  #     - intent: goodbye
-  #     - action: action_check_pending_tasks
+      - action: action_check_pending_tasks 

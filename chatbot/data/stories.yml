@@ -1,30 +1,114 @@
-# version: "3.1"
+version: "3.1"
 
-# stories:
+stories:
 
-# - story: happy path
-#   steps:
-#   - intent: greet
-#   - action: utter_greet
-#   - intent: mood_great
-#   - action: utter_happy
+- story: Add a task to the to-do list
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: add_todo
+      entities:
+        - task: "study for exam"
+    - action: action_add_todo
 
-# - story: sad path 1
-#   steps:
-#   - intent: greet
-#   - action: utter_greet
-#   - intent: mood_unhappy
-#   - action: utter_cheer_up
-#   - action: utter_did_that_help
-#   - intent: affirm
-#   - action: utter_happy
+- story: Show the to-do list
+  steps:
+    - intent: show_todos
+    - action: action_show_todos
 
-# - story: sad path 2
-#   steps:
-#   - intent: greet
-#   - action: utter_greet
-#   - intent: mood_unhappy
-#   - action: utter_cheer_up
-#   - action: utter_did_that_help
-#   - intent: deny
-#   - action: utter_goodbye
+- story: Delete a task from the to-do list
+  steps:
+    - intent: delete_todo
+      entities:
+        - task: "study for exam"
+    - action: action_delete_todo
+
+- story: Clear all tasks
+  steps:
+    - intent: clear_all_todos
+    - action: action_clear_all_todos
+
+- story: Ask for motivation
+  steps:
+    - intent: request_motivation
+    - action: action_give_motivation
+
+- story: Say thanks
+  steps:
+    - intent: thank
+    - action: utter_thanks
+
+- story: Say goodbye with tasks
+  steps:
+    - intent: add_todo
+      entities:
+        - task: "do taxes"
+    - action: action_add_todo
+    - intent: goodbye
+    - action: action_check_pending_tasks
+
+- story: Say goodbye with no tasks
+  steps:
+    - intent: clear_all_todos
+    - action: action_clear_all_todos
+    - intent: goodbye
+    - action: action_check_pending_tasks
+
+- story: Add multiple tasks back to back
+  steps:
+    - intent: add_todo
+      entities:
+        - task: "laundry"
+        - priority: "low"
+    - action: action_add_todo
+
+    - intent: add_todo
+      entities:
+        - task: "study for midterm"
+        - priority: "urgent"
+    - action: action_add_todo
+
+    - intent: show_todos
+    - action: action_show_todos
+
+- story: Attempt to delete a nonexistent task
+  steps:
+    - intent: delete_todo
+      entities:
+        - task: "go to mars"
+    - action: action_delete_todo
+
+- story: Goodbye with tasks pending
+  steps:
+    - intent: add_todo
+      entities:
+        - task: "buy groceries"
+        - priority: "urgent"
+    - action: action_add_todo
+
+    - intent: goodbye
+    - action: action_check_pending_tasks
+
+- story: Goodbye with no tasks
+  steps:
+    - intent: clear_all_todos
+    - action: action_clear_all_todos
+
+    - intent: goodbye
+    - action: action_check_pending_tasks
+
+- story: Ask for motivation
+  steps:
+    - intent: request_motivation
+    - action: action_give_motivation
+    
+    - intent: thank
+    - action: utter_thanks
+
+    - intent: goodbye
+    - action: action_check_pending_tasks
+
+
+
+    
+

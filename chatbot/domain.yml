@@ -10,13 +10,18 @@ intents:
   - delete_todo
   - clear_all_todos
   - request_motivation
+  - inform_priority
 
 responses:
+  utter_ask_priority:
+    - text: "What's the priority for this task? (urgent / normal / low)"
+    - text: "What are the chances you actually do this task? (high / medium / low)"
+
   utter_greet:
   - text: "Oh great, another human. What do you want?"
   - text: "You again? Fine, what’s up?"
   - text: "What do you want now?"
-
+    
   utter_thanks:
   - text: "Wow, gratitude. How original."
   - text: "You're welcome, I guess."
@@ -27,13 +32,15 @@ responses:
 
   utter_ask_task:
   - text: "What’s the task? Or are you too busy being indecisive?"
+  - text: "Was that English? Try again, but maybe use smaller words this time."
+  - text: "Even Google couldn't decode that. Wanna rephrase?"
+  - text: "I'd pretend to understand, but my programming forbids lying. Try again?"
+  - text: "That sentence gave me an existential crisis. Simplify?"
+  - text: "*sigh* Humans. What exactly should I add to your list of procrastination?"
 
   utter_show_todos:
   - text: "Here’s your list (you’re so disorganized):
 - {todos}"
-
-  utter_priority_confirm:
-  - text: "Sure, I'll pretend this is '{priority}' priority. *eye roll*"
 
   utter_motivation:
   - text: "Wow, you actually want to be productive? Miracles do happen."
@@ -50,26 +57,44 @@ responses:
   utter_goodbye_all_done:
   - text: "OMG, you finished everything. I didn’t think you could do it."
   - text: "See you never."
-  
+
+  utter_not_understood:
+  - text: "Wow. That made less sense than my last software update."
+  - text: "Let me check my 'nonsense-to-English' dictionary... nope, still confused."
+  - text: "I'm good, but not 'decipher alien gibberish' good. Try again?"
+
+  utter_added_task:
+    - text: "'{task}' is on your list now. Try not to ignore it this time."
+    - text: "Fine, I've added '{task}'. Happy?"
+    - text: "'{task}' added. I bet you'll totally do it."
+    - text: "'{task}'? Sure, whatever. It's in your list."
+    - text: "Okay, I added '{task}'. Now go be productive or something."
+    - text: "'{task}' has been added. Your future self is already procrastinating."
+    - text: "Cool. '{task}' is on the list. Not judging... much."
+    - text: "Task '{task}' saved. Good luck pretending you'll do it."
+    - text: "'{task}' added with {priority} priority. Ambitious, huh?"
+    - text: "I've added '{task}'. I give it a solid 3% chance of getting done."
+    - text: "Added '{task}' to your list. I'll assume you'll ignore it for a few days."
+    - text: "'{task}' is added, but let's be real, you're never doing this."
+    - text: "Sure, whatever. Added '{task}' (I give it 3% completion chance)."
+
+
 entities:
   - task
   - priority
 
 slots:
+  task:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: task
+
   priority:
-    type: categorical
+    type: text
     mappings:
-    - type: from_entity
-      entity: priority
-    values:
-      - ASAP
-      - Whenever
-      - Backburner
-  todo_list:
-    type: list
-    mappings:
-    - type: custom
-    influence_conversation: false
+      - type: from_entity
+        entity: priority
 
 actions:
   - action_add_todo
