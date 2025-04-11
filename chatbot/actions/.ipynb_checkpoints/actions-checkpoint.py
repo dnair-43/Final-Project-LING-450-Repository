@@ -7,74 +7,21 @@ import random
 
 todo_list = []
 
-
-# class ActionAddTodo(Action):
-#     def name(self) -> Text:
-#         return "action_add_todo"
-
-#     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-#         task = next(tracker.get_latest_entity_values("task"), None)
-#         priority = next(tracker.get_latest_entity_values("priority"), None)
-
-#         if task:
-#             todo_list.append({"task": task, "priority": "normalL"})  # Default priority: NORMAL
-            
-#             dispatcher.utter_message(text=f"Added '{task}' to your to-do list.")
-#         else:
-#             dispatcher.utter_message(response="utter_ask_task")
-        
-#         return []
-
-# class ActionAddTodo(Action):
-#     def name(self) -> Text:
-#         return "action_add_todo"
-
-#     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]
-#         task = next(tracker.get_latest_entity_values("task"), None)
-#         priority = next(tracker.get_latest_entity_values("priority"), None)
-        
-#         if task:
-#             if not priority:
-#                 todo_list.append({"task": task, "priority": "normal"})
-#             else:
-#                 # If priority is found, classify it and save
-#                 if priority.lower() in ["urgent", "asap", "high", "important"]:
-#                     priority = "high"
-#                 elif priority.lower() in ["normal", "medium"]:
-#                     priority = "medium"
-#                 elif priority.lower() in ["low", "low priority", "not important"]:
-#                     priority = "low"
-#                 else:
-#                     priority = "normal"  
-                
-#                 todo_list.append({"task": task, "priority": priority})
-#             dispatcher.utter_message(response="utter_added_task")
-                
-        
-#         else:
-#             dispatcher.utter_message(response="utter_ask_task")
-        
-#         return []
-
 class ActionAddTodo(Action):
     def name(self) -> Text:
         return "action_add_todo"
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        # Extract the task entity
         task = next(tracker.get_latest_entity_values("task"), None)
-        
-        # Extract the priority entity, if available
         priority = next(tracker.get_latest_entity_values("priority"), None)
 
         if task:
-            # If no priority is provided, set it to default
+            # set it to default
             if not priority:
                 priority = "normal"
             else:
                 priority = self.normalize_priority(priority)
-            
-            # Save task and priority in a slot or variable
+
             todo_list.append({"task": task, "priority": priority})
             dispatcher.utter_message(response="utter_added_task")
             
@@ -84,7 +31,6 @@ class ActionAddTodo(Action):
         return []
 
     def normalize_priority(self, priority: str) -> str:
-        # Normalize various ways users might mention priority
         priority = priority.lower()
         if priority in ["urgent", "asap", "high", "important"]:
             return "urgent"
@@ -93,8 +39,7 @@ class ActionAddTodo(Action):
         elif priority in ["low", "low priority", "not important"]:
             return "low"
         else:
-            return "normal"  # Default to normal if unclear
-
+            return "normal"
 
 class ActionShowTodos(Action):
     def name(self) -> Text:
@@ -104,8 +49,7 @@ class ActionShowTodos(Action):
         if not todo_list:
             dispatcher.utter_message(text="Your to-do list is empty. Must be nice.")
             return []
-        
-        # Format tasks
+
         tasks_formatted = [
             f"{i+1}. {item['task']} [{item['priority'].upper()}]" 
             for i, item in enumerate(todo_list)
@@ -115,7 +59,6 @@ class ActionShowTodos(Action):
         return []
 
 class ActionDeleteTodo(Action):
-    """Deletes a task from the list"""
     def name(self) -> Text:
         return "action_delete_todo"
 
@@ -126,7 +69,6 @@ class ActionDeleteTodo(Action):
             dispatcher.utter_message(text="Delete what exactly? Try again.")
             return []
         
-        # Find the task in the global list
         for item in todo_list:
             if item["task"].lower() == task.lower():
                 todo_list.remove(item)
@@ -142,7 +84,6 @@ class ActionDeleteTodo(Action):
         return []
 
 class ActionClearAllTodos(Action):
-    """Clears all tasks"""
     def name(self) -> Text:
         return "action_clear_all_todos"
 
@@ -176,7 +117,6 @@ class ActionCheckPendingTasks(Action):
         return []
 
 class ActionGiveMotivation(Action):
-    """Provides sarcastic 'motivation'"""
     def name(self) -> Text:
         return "action_give_motivation"
 

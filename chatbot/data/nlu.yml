@@ -68,7 +68,7 @@ nlu:
     - make sure to [text Alice](task), it's [medium](priority) urgency
     - [Check emails](task) later. It's only [low](priority)
     - I absolutely need to [fix my resume](task) [ASAP](priority)!
-    - Remind me to [go to the store](task) [soon](priority)
+    - Remind me to [go to the store]{"entity": "task"} [soon](priority)
     
 - intent: delete_todo
   examples: |
